@@ -34,7 +34,7 @@ for host in $(cat <file_name>); do #maintain a .txt file with list of servers (o
 	export INSTALL_AGENT_LINUX_X86_64=Y
 
 #Installation of Control-M Agent
-	sh <desired_file_path>/setup.sh -silent <agent_parameters_file_name> #Remember to genrate a .xml file prior to this process with generic installation parameters 
+	sh <desired_file_path>/setup.sh -silent <agent_parameters_file_name> #Remember to genrate a .xml file prior to this process with generic installation parameters (sample provided) 
 	
 #Refresh session after installation 
 	sshpass -p "<password>" ssh -o StrictHostKeyChecking=no <username>@$host
