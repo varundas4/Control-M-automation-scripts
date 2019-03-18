@@ -1,17 +1,18 @@
-#!/bin/sh
+#!/bin/sh	
 ########################################################################
 ##Script name: auto_ctm_agent_install.sh			      ## 
 ##Description: Performs silent install of Control-M Agent and services##
-##	       on servers listed in srv.txt file 		      ##
-##Created & Tested by: Varun Das 	                              ##
+##	       on servers listed in a 'separte' file 		      ##
+##Created & Tested by: Varun Das 				      ##
+##Date: 6th March 2019						      ##
 ########################################################################
 
 set +x;
  
 #SSH connect to selected hosts
-for host in $(cat /root/Desktop/srv.txt); do
+for host in $(cat <file_name>); do #maintain a .txt file with list of servers (one-per-line) where installation is required
 
-	sshpass -p "redhat" ssh -o StrictHostKeyChecking=no redhat@$host << EOF	
+	sshpass -p "<password>" ssh -o StrictHostKeyChecking=no <username>@$host << EOF	
 
 #Pre-checks		 
 	echo "Connected to host: $host"
@@ -19,41 +20,27 @@ for host in $(cat /root/Desktop/srv.txt); do
 	echo "Today's date: `date`"
 	echo "Currrent user: `whoami`"
 
-#Check if Agent services pre-exist
-#	ps -eaf | grep ctm*
-#	rc=$?
-#	if [ $rc -eq 0 ]; then
-#	echo "Found pre-existing Control-M services. Starting Uninstall."
-	
-#Uninstalling existing Control-M agent services	
-#	cd /home/redhat/BMCINSTALL/uninstall/DRKAI*/
-#	sh -x uninstall.sh -silent
-#	echo "Pre-existing Control-M services uninstalled successfully."
-#	else
-#	echo "Initiating fresh installation of Control-M services."
-#	fi
-
 #Switch to installation package directory
-	cd /home/redhat/
+	cd <package_path> #usually it is /tmp
 	
 #Unzip and extract installation package
-	gunzip -r /home/redhat/DRKAI.8.0.00_Linux-x86_64.gz
-	tar -xvf /home/redhat/DRKAI.8.0.00_Linux-x86_64
+	gunzip -r <desired_file_path>/DRKAI.8.0.00_Linux-x86_64.z	#for packages downloaded from EPD site
+	tar -xvf <desired_file_path>/DRKAI.8.0.00_Linux-x86_64
 
 #Change file permissions
-	chmod 777 -R FORMS setup.sh Setup_files
+	chmod 700 -R FORMS setup.sh Setup_files #set permission for further operation on files as appropriate
 
 #Prepare OS for 32/64-bit installation
 	export INSTALL_AGENT_LINUX_X86_64=Y
 
 #Installation of Control-M Agent
-	sh /home/redhat/setup.sh -silent /home/redhat/agent_para.xml
+	sh <desired_file_path>/setup.sh -silent <agent_parameters_file_name> #Remember to genrate a .xml file prior to this process with generic installation parameters 
 	
 #Refresh session after installation 
-	sshpass -p "redhat" ssh -o StrictHostKeyChecking=no redhat@$host
+	sshpass -p "<password>" ssh -o StrictHostKeyChecking=no <username>@$host
 
 #Agent Diagnostic Check
-	ag_diag_comm
+	ag_diag_comm #Report MUST be successful
 
 #Check status of installation
 	res=$?
@@ -67,7 +54,5 @@ for host in $(cat /root/Desktop/srv.txt); do
 	
 EOF
 done
-
-#mail -s "1234" abc.xyz@mmmm.com
 
 
