@@ -2,10 +2,10 @@
     <target.product>Control-M/Agent 8.0.00</target.product>
     <agent.parameters>
         <entry key="field.Authorized.Controlm.Server.Host" value="ctmtest"/>
-        <entry key="ctm_agent.Tracker.Event.Port" value="7035"/>
-        <entry key="field.Agent.To.Server.Port.Number" value="7005"/>
+        <entry key="ctm_agent.Tracker.Event.Port" value="****"/>       #enter only 4-digit numeric values
+        <entry key="field.Agent.To.Server.Port.Number" value="****"/>
         <entry key="ctm_agent.Tcp_ip.Timeout" value="60"/>
-        <entry key="field.Server.To.Agent.Port.Number" value="7006"/>
+        <entry key="field.Server.To.Agent.Port.Number" value="****"/>
         <entry key="Ignore.Disabling.Agent.Failure" value="false"/>
         <entry key="field.Primary.Controlm.Server.Host" value="ctmtest"/>
     </agent.parameters>
