@@ -6,8 +6,6 @@
 ##Date: 19th November 2018                    ##
 ##############################################*/					
 
-sql
-
 SELECT * FROM CMR_AJF;
 
 SELECT jobname, orderid, status 
