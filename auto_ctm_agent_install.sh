@@ -35,16 +35,20 @@ for host in $(cat <file_name>); do #maintain a .txt file with list of servers (o
 
 #Installation of Control-M Agent
 	sh <desired_file_path>/setup.sh -silent <agent_parameters_file_name> #Remember to genrate a .xml file prior to this process with generic installation parameters (sample provided) 
-	
-#	    <target.product>Control-M/Agent 8.0.00</target.product>
- #   <agent.parameters>
-  #      <entry key="field.Authorized.Controlm.Server.Host" value="ctmtest"/>
-   #     <entry key="ctm_agent.Tracker.Event.Port" value="****"/>       #enter only 4-digit numeric values
-    #    <entry key="ctm_agent.Tracker.Event.Port" value="****"/>       <!--enter only 4-digit numeric values-->
-     #   <entry key="field.Agent.To.Server.Port.Number" value="****"/>
-      #  <entry key="ctm_agent.Tcp_ip.Timeout" value="60"/>
-       # <entry key="field.Server.To.Agent.Port.Number" value="****"/>
-	
+
+# Sample xml entry:
+# <AutomatedInstallation langpack="eng">
+#    <target.product>Control-M/Agent 8.0.00</target.product>
+#    <agent.parameters>
+#        <entry key="field.Authorized.Controlm.Server.Host" value="ctmtest"/>
+#        <entry key="ctm_agent.Tracker.Event.Port" value="****"/>       <!--enter only 4-digit numeric values-->
+#        <entry key="field.Agent.To.Server.Port.Number" value="****"/>
+#       <entry key="field.Server.To.Agent.Port.Number" value="****"/>
+#        <entry key="Ignore.Disabling.Agent.Failure" value="false"/>
+#        <entry key="field.Primary.Controlm.Server.Host" value="ctmtest"/>
+#    </agent.parameters>
+# </AutomatedInstallation> 
+
 #Refresh session after installation 
 	sshpass -p "<password>" ssh -o StrictHostKeyChecking=no <username>@$host
 
