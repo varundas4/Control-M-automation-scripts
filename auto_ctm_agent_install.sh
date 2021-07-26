@@ -10,7 +10,7 @@
 set +x;
  
 #SSH connect to selected hosts
-for host in $(cat <file_name>); do #maintain a .txt file with list of servers (one-per-line) where installation is required
+for host in $(cat <file_name>); do #maintain a separate text file with list of servers (one-per-line) where installation is required
 
 	sshpass -p "<password>" ssh -o StrictHostKeyChecking=no <username>@$host << EOF	
 
